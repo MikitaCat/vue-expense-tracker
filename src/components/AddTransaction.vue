@@ -1,6 +1,6 @@
 <template>
     <h3>Add new transaction</h3>
-    <form id="form">
+    <form id="form" @submit.prevent="onSubmit">
         <div class="form-control">
             <label for="text">Text</label>
             <input type="text" id="text" placeholder="Enter text..." />
@@ -13,3 +13,9 @@
         <button class="btn">Add transaction</button>
     </form>
 </template>
+
+<script setup>
+const onSubmit = () => {
+    console.log("Submit")
+}
+</script>
