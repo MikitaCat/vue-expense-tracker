@@ -24,9 +24,15 @@ const text = ref("")
 const amount = ref("")
 
 const onSubmit = () => {
-    if (!text.value) {
-        toast.error("Error")
+    if (!text.value || !amount.value) {
+        toast.error("Both fields should be filled")
+        return
     }
-    console.log("Submit", text.value)
+
+    console.log(text.value, amount.value)
+
+    text.value = ""
+    amount.value = ""
+
 }
 </script>
