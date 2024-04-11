@@ -30,6 +30,10 @@ const onSubmit = () => {
         toast.error("Both fields should be filled")
         return
     }
+    if (isNaN(parseFloat(amount.value))) {
+        toast.error("Please put the number to Amount field")
+        return
+    }
 
     console.log(text.value, amount.value)
     const transactionData = {
