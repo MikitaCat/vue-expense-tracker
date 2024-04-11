@@ -14,6 +14,7 @@ import Header from './components/Header.vue';
 import IncomeExpences from "./components/IncomeExpenses.vue"
 import TransactionList from "./components/TransactionList.vue"
 import AddTransaction from "./components/AddTransaction.vue"
+import { generateRandomNumber } from "./utils/randomNumber"
 
 import { computed, ref } from 'vue';
 
@@ -47,6 +48,7 @@ const expense = computed(() => {
 
 //Add Transaction
 const handleTransactionSubmitted = (data) => {
-  console.log("Works", data)
+  const random = generateRandomNumber()
+  console.log("Works", random)
 }
 </script>
