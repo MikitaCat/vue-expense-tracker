@@ -18,6 +18,11 @@ import { generateRandomNumber } from "./utils/randomNumber"
 
 import { computed, ref } from 'vue';
 
+import { useToast } from 'vue-toastification';
+
+
+const toast = useToast()
+
 const transactions = ref([
   { id: 1, text: "Flower", amount: -9.99 },
   { id: 2, text: "Salary", amount: 229.99 },
@@ -53,5 +58,12 @@ const handleTransactionSubmitted = (data) => {
     text: data.text,
     amount: data.amount
   })
+
+  if (data.amount > 0) {
+    toast.success(`Balance has been replenished by ${data.amount}$`)
+  }
+  if (data.amount < 0) {
+    toast.warning(`The balance has been deducted by ${data.amount}$`)
+  }
 }
 </script>
