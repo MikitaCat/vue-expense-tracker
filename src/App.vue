@@ -48,7 +48,10 @@ const expense = computed(() => {
 
 //Add Transaction
 const handleTransactionSubmitted = (data) => {
-  const random = generateRandomNumber()
-  console.log("Works", random)
+  transactions.value.push({
+    id: generateRandomNumber(),
+    text: data.text,
+    amount: data.amount
+  })
 }
 </script>
