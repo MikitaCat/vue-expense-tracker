@@ -12,11 +12,11 @@
 <script setup>
 import { defineProps } from 'vue';
 
-const emit = defineEmits(["deleteTransaction"])
+const emit = defineEmits(["transactionDeleted"])
 
 const deleteTransaction = (id) => {
     // console.log("ID", id)
-    emit("deleteTransaction", id)
+    emit("transactionDeleted", id)
 }
 
 const props = defineProps({

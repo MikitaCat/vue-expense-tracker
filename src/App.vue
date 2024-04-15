@@ -3,7 +3,7 @@
   <div class="container">
     <Balance :total="total" />
     <IncomeExpences :income="+income" :expense="+expense" />
-    <TransactionList :transactions="transactions" @deleteTransaction="testEmitFn" />
+    <TransactionList :transactions="transactions" @transactionDeleted="handleTranactionDeleted" />
     <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
   </div>
 </template>
@@ -30,8 +30,12 @@ const transactions = ref([
   { id: 4, text: "Guitar", amount: 150 },
 ])
 
-const testEmitFn = (data) => {
-  console.log("EMMITED DATA", data)
+//Delete Transaction
+const handleTranactionDeleted = (id) => {
+  console.log("EMMITED DATA", id)
+  transactions.value = transactions.value.filter((item) => item.id !== id)
+
+  toast.info("Transaction has been deleted")
 }
 
 //Get total
