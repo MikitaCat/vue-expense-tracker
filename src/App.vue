@@ -3,7 +3,7 @@
   <div class="container">
     <Balance :total="total" />
     <IncomeExpences :income="+income" :expense="+expense" />
-    <TransactionList :transactions="transactions" />
+    <TransactionList :transactions="transactions" @deleteTransaction="testEmitFn" />
     <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
   </div>
 </template>
@@ -29,6 +29,10 @@ const transactions = ref([
   { id: 3, text: "Phone", amount: -10 },
   { id: 4, text: "Guitar", amount: 150 },
 ])
+
+const testEmitFn = (data) => {
+  console.log("EMMITED DATA", data)
+}
 
 //Get total
 const total = computed(() => {
