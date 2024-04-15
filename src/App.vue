@@ -16,7 +16,7 @@ import TransactionList from "./components/TransactionList.vue"
 import AddTransaction from "./components/AddTransaction.vue"
 import { generateRandomNumber } from "./utils/randomNumber"
 
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 
 import { useToast } from 'vue-toastification';
 
@@ -24,16 +24,20 @@ import { useToast } from 'vue-toastification';
 const toast = useToast()
 
 const transactions = ref([
-  { id: 1, text: "Flower", amount: -9.99 },
-  { id: 2, text: "Salary", amount: 229.99 },
-  { id: 3, text: "Phone", amount: -10 },
-  { id: 4, text: "Guitar", amount: 150 },
 ])
+
+onMounted(() => {
+  const savedTransactions = JSON.parse(localStorage.getItem("transactions"))
+  if (savedTransactions) {
+    transactions.value = savedTransactions
+  }
+})
 
 //Delete Transaction
 const handleTranactionDeleted = (id) => {
   console.log("EMMITED DATA", id)
   transactions.value = transactions.value.filter((item) => item.id !== id)
+  saveTransactionsToLocalStorage()
 
   toast.info("Transaction has been deleted")
 }
@@ -66,6 +70,7 @@ const handleTransactionSubmitted = (data) => {
     text: data.text,
     amount: data.amount
   })
+  saveTransactionsToLocalStorage()
 
   if (data.amount > 0) {
     toast.success(`Balance has been replenished by ${data.amount}$`)
@@ -73,5 +78,10 @@ const handleTransactionSubmitted = (data) => {
   if (data.amount < 0) {
     toast.warning(`The balance has been deducted by ${data.amount}$`)
   }
+}
+
+//Save transactions to localStorage
+const saveTransactionsToLocalStorage = () => {
+  localStorage.setItem("transactions", JSON.stringify(transactions.value))
 }
 </script>
